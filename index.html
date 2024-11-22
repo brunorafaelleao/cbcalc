@@ -28,9 +28,7 @@
         .getElementById("calcular")
         .addEventListener("click", function () {
           const rendimentoInput = document.getElementById("rendimento").value;
-          const rendimento = parseFloat(
-            rendimentoInput.replace(".", "").replace(",", ".")
-          );
+          const rendimento = parseFloat(rendimentoInput.replace(",", "."));
 
           if (isNaN(rendimento) || rendimento <= 0) {
             alert("Por favor, insira um valor válido para o rendimento.");
