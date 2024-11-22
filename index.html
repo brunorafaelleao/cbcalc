@@ -7,14 +7,50 @@
   </head>
   <body>
     <h1>Vamos calcular a sua comunhão de bens?</h1>
-    <form action="">
+    <form id="formulario" action="">
       <label for="rendimento">Insira seu rendimento líquido</label><br />
-      <input type="number" name="rendimento" /><br />
-      <button>Calcular</button><button>Limpar dados</button><br />
+      <input type="number" id="rendimento" name="rendimento" /><br />
+      <button type="button" id="calcular">Calcular</button>
+      <button type="reset" id="limpar">Limpar dados</button><br />
       <label for="dezPorcento">Valor dos seus 10% é</label><br />
-      <input type="number" name="dezPorcento" /><br />
+      <input type="text" id="dezPorcento" name="dezPorcento" readonly /><br />
       <label for="cincoPorcento">Valor dos seus 5% é</label><br />
-      <input type="number" name="cincoPorcento" /><br />
+      <input
+        type="text"
+        id="cincoPorcento"
+        name="cincoPorcento"
+        readonly
+      /><br />
     </form>
+
+    <script>
+      document
+        .getElementById("calcular")
+        .addEventListener("click", function () {
+          const rendimentoInput = document.getElementById("rendimento").value;
+          const rendimento = parseFloat(
+            rendimentoInput.replace(".", "").replace(",", ".")
+          );
+
+          if (isNaN(rendimento) || rendimento <= 0) {
+            alert("Por favor, insira um valor válido para o rendimento.");
+            return;
+          }
+
+          const dezPorcento = (rendimento * 10) / 100;
+          const cincoPorcento = (rendimento * 5) / 100;
+
+          document.getElementById("dezPorcento").value = dezPorcento
+            .toFixed(2)
+            .replace(".", ",");
+          document.getElementById("cincoPorcento").value = cincoPorcento
+            .toFixed(2)
+            .replace(".", ",");
+        });
+
+      document.getElementById("limpar").addEventListener("click", function () {
+        document.getElementById("formulario").reset();
+      });
+    </script>
   </body>
 </html>
